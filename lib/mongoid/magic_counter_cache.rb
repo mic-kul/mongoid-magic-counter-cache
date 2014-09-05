@@ -79,8 +79,11 @@ module Mongoid #:nodoc:
             end
           else
             relation = doc.send(name)
-            if relation && relation.class.fields.keys.include?(counter_name)
-              increment_association(relation, counter_name.to_sym, inc)
+            relation = [relation] unless relation.respond_to?(:each)
+            relation.each do |entry|
+              if entry && entry.class.fields.keys.include?(counter_name)
+                increment_association(entry, counter_name.to_sym, inc)
+              end
             end
           end
         end

@@ -112,7 +112,7 @@ module Mongoid #:nodoc:
       private
 
       def get_counter_name(options)
-        options.fetch(:field, "#{actual_model_name.demodulize.underscore}_count").to_s
+        options.fetch(:field, "#{actual_model_name.demodulize.underscore.pluralize}_count").to_s
       end
 
       def condition_result(condition, doc)
